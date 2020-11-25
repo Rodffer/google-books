@@ -10,10 +10,12 @@ export default createGlobalStyle`
 
 :root {
   --blue: #2755ff;
-  --gray: #444b54;
+  --secblue: #71c2ff;
+  --gray: #202124;
+  --secgray: #71757a;
   --orange: #fa784a;
   --red: #c53030;
-  --white: #f0f0f0;
+  --white: #ffffff;
 
 }
 
@@ -29,7 +31,11 @@ body, input, button {
 #root{
   max-width: 960px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 0px 20px;
+}
+
+button {
+  cursor: pointer;
 }
 
 `;
