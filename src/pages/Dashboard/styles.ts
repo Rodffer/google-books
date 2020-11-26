@@ -58,8 +58,8 @@ export const Books = styled.div`
 `;
 
 export const Description = styled.div`
-  height: 22em;
-  width: 12em;
+  max-height: 22em;
+  max-width: 12em;
   background-color: var(--white);
   border-radius: 6px;
   cursor: pointer;
@@ -85,18 +85,49 @@ export const CardImage = styled.div`
   }
 `;
 
+export const CardContentDate = styled.div`
+  margin-top: 8px;
+  margin-left: 8px;
+
+  max-width: 4ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--secgray);
+`;
+
 export const CardContent = styled.div`
   margin-top: 8px;
   padding: 0 8px;
   color: var(--gray);
   text-align: left;
 
+  max-width: 64ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  strong {
+  }
+
   p {
+    text-decoration: none;
     color: var(--secgray);
   }
 `;
 
 export const Details = styled.div`
   margin-top: 16px;
-  text-align: center;
+  margin-bottom: 16px;
+
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  svg {
+    margin-left: 16px;
+    color: var(--gray);
+  }
 `;
