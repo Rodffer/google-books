@@ -121,13 +121,31 @@ export const Details = styled.div`
   margin-top: 16px;
   margin-bottom: 16px;
 
-  p {
+  a {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+    transition: 0.2s;
+
+    :link {
+      font-size: 1em;
+      font-weight: bold;
+      text-decoration: none;
+      color: var(--gray);
+    }
+
+    :visited {
+      color: var(--gray);
+      text-decoration: none;
+    }
+
+    &:hover {
+      color: var(--orange);
+    }
   }
+
   svg {
     margin-left: 16px;
-    color: var(--gray);
   }
 `;

@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from 'react';
+import { Link } from 'react-router-dom';
 import { FiChevronRight } from 'react-icons/fi';
 import Header from '../../components/Header';
 
@@ -70,10 +71,10 @@ const Dashboard: React.FC = () => {
             </S.CardContentDate>
 
             <S.Details>
-              <p>
+              <Link to={`details/${book.id}`}>
                 Detalhes
                 <FiChevronRight />
-              </p>
+              </Link>
             </S.Details>
           </S.Description>
         ))}
