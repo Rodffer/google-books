@@ -13,12 +13,8 @@ const Header: React.FC = () => {
       </Link>
 
       <nav>
-        <S.StyledLink to="/" activeClassName="is-active">
-          Inicio
-        </S.StyledLink>
-        <S.StyledLink to="favorites" activeClassName="is-active">
-          Favoritos
-        </S.StyledLink>
+        <S.StyledLink to="/">Inicio</S.StyledLink>
+        <S.StyledLink to="favorites">Favoritos</S.StyledLink>
       </nav>
     </S.Container>
   );

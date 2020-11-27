@@ -27,24 +27,34 @@ const Dashboard: React.FC = () => {
   const [searchBook, setSearchBook] = useState('');
   const [results, setResults] = useState<Book[]>([]);
   const [apiKey] = useState('AIzaSyDtjsZQXaPUwmGWLJktuRWSFk53WfH_lxg');
+  const [inputError, setInputError] = useState('');
 
   async function handleSearchBook(
     event: FormEvent<HTMLFormElement>,
   ): Promise<void> {
     event.preventDefault();
+    if (!searchBook) {
+      setInputError('Ops! Digite o que deseja pesquisar!');
+      return;
+    }
+    try {
+      const response = await api.get(
+        `books/v1/volumes?q=/${searchBook}:keyes&${apiKey}&maxResults=40`,
+      );
 
-    const response = await api.get(
-      `books/v1/volumes?q=/${searchBook}:keyes&${apiKey}&maxResults=40`,
-    );
-
-    setResults(response.data.items);
+      setResults(response.data.items);
+      setSearchBook('');
+      setInputError('');
+    } catch (err) {
+      setInputError('Erro ao buscar livro');
+    }
   }
 
   return (
     <>
       <Header />
       <S.Title>Explore Livros no Google Books</S.Title>
-      <S.Form onSubmit={handleSearchBook}>
+      <S.Form hasError={!!inputError} onSubmit={handleSearchBook}>
         <input
           value={searchBook}
           onChange={e => setSearchBook(e.target.value)}
@@ -52,6 +62,8 @@ const Dashboard: React.FC = () => {
         />
         <button type="submit">Pesquisar</button>
       </S.Form>
+
+      {inputError && <S.Error>{inputError}</S.Error>}
 
       <S.Books>
         {results.map(book => (

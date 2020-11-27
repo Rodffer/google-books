@@ -30,9 +30,4 @@ export const Container = styled.div`
 export const StyledLink = styled(NavLink)`
   text-decoration: none;
   color: var(--white);
-
-  &.is-active {
-    color: var(--orange);
-    padding-bottom: 8px;
-  }
 `;
