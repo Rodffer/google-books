@@ -1,0 +1,49 @@
+&startIndex=${currentPage}&maxResults=${limit}
+ 
+ const [searchBook, setSearchBook] = useState('');
+  const [results, setResults] = useState<Book[]>([]);
+
+  const [apiKey] = useState('AIzaSyDtjsZQXaPUwmGWLJktuRWSFk53WfH_lxg');
+
+  const [total, setTotal] = useState(0);
+  const [limit, setLimit] = useState(8);
+  const [pages, setPages] = useState<number[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const [inputError, setInputError] = useState('');
+
+ async function handleSearchBook(
+    event: FormEvent<HTMLFormElement>,
+  ): Promise<void> {
+    event.preventDefault();
+    if (!searchBook) {
+      setInputError('Ops! Digite o que deseja pesquisar!');
+      return;
+    }
+    try {
+      const response = await api.get(
+        `books/v1/volumes?q=/${searchBook}:keyes&${apiKey}&startIndex=${currentPage}&maxResults=${limit}`,
+      );
+
+      setTotal(response.data.totalItems);
+
+      const totalPages = Math.ceil(total / limit);
+
+      const arrayPages = [];
+
+      for (let i = 1; i <= totalPages; +i) {
+        arrayPages.push(i);
+      }
+
+      console.log(total / limit);
+      console.log(response.data.totalItems);
+      console.log(totalPages);
+
+      setResults(response.data.items);
+
+      setSearchBook('');
+      setInputError('');
+    } catch (err) {
+      setInputError('Erro ao buscar livro');
+    }
+  }

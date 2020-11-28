@@ -1,31 +1,20 @@
 import React, { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { FiChevronRight } from 'react-icons/fi';
+import { FcBookmark } from 'react-icons/fc';
+
+import { IBook } from '../../types/IBook';
+
 import Header from '../../components/Header';
 
 import * as S from './styles';
 
 import api from '../../services/api';
 
-interface Book {
-  volumeInfo: {
-    title: string;
-    categories?: string[];
-    publisher?: string;
-    authors: string[];
-    description: string;
-    infoLink: string;
-    imageLinks?: {
-      thumbnail: string;
-    };
-    publishedDate: string;
-  };
-  id: string;
-}
-
 const Dashboard: React.FC = () => {
   const [searchBook, setSearchBook] = useState('');
-  const [results, setResults] = useState<Book[]>([]);
+  const [results, setResults] = useState<IBook[]>([]);
+
   const [apiKey] = useState('AIzaSyDtjsZQXaPUwmGWLJktuRWSFk53WfH_lxg');
   const [inputError, setInputError] = useState('');
 
@@ -39,10 +28,11 @@ const Dashboard: React.FC = () => {
     }
     try {
       const response = await api.get(
-        `books/v1/volumes?q=/${searchBook}:keyes&${apiKey}&maxResults=40`,
+        `books/v1/volumes?q=/${searchBook}:keyes&${apiKey}`,
       );
 
       setResults(response.data.items);
+
       setSearchBook('');
       setInputError('');
     } catch (err) {
@@ -83,6 +73,11 @@ const Dashboard: React.FC = () => {
             </S.CardContentDate>
 
             <S.Details>
+              <Link to={`favorites/${book.id}`}>
+                Favorito
+                <FcBookmark />
+              </Link>
+
               <Link to={`details/${book.id}`}>
                 Detalhes
                 <FiChevronRight />

@@ -12,23 +12,6 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    font-weight: bold;
-    color: var(--white);
-    transition: 0.2s;
-
-    &:hover {
-      color: var(--orange);
-    }
-
-    svg {
-      margin-right: 8px;
-    }
-  }
 `;
 
 export const BookDetail = styled.div`
@@ -106,5 +89,24 @@ export const BookDetail = styled.div`
         }
       }
     }
+  }
+`;
+export const ButtonBack = styled.h1`
+  cursor: pointer;
+
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--white);
+  transition: 0.2s;
+
+  &:hover {
+    color: var(--orange);
+  }
+
+  svg {
+    margin-right: 8px;
   }
 `;

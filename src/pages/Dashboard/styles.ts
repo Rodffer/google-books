@@ -62,7 +62,6 @@ export const Form = styled.form<FormProps>`
 `;
 export const Error = styled.span`
   font-weight: bold;
-
   display: block;
   color: var(--red);
   margin-left: 32px;
@@ -73,7 +72,6 @@ export const Books = styled.div`
   margin-top: 64px;
   display: flex;
   flex-wrap: wrap;
-  max-width: 100%;
   align-items: center;
   justify-content: center;
 `;
@@ -107,7 +105,7 @@ export const CardImage = styled.div`
 `;
 
 export const CardContentDate = styled.div`
-  margin-top: 8px;
+  margin-top: 4px;
   margin-left: 8px;
 
   max-width: 4ch;
@@ -143,6 +141,7 @@ export const Details = styled.div`
   margin-bottom: 16px;
 
   a {
+    margin-bottom: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -169,4 +168,17 @@ export const Details = styled.div`
   svg {
     margin-left: 16px;
   }
+`;
+
+export const Paginator = styled.div`
+  display: flex;
+  min-width: 500px;
+  justify-content: space-between;
+`;
+export const PaginationButton = styled.div`
+  display: flex;
+`;
+export const PaginationItem = styled.div`
+  cursor: pointer;
+  margin: 0 10px;
 `;

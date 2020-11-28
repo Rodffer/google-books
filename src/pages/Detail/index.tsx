@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useRouteMatch, Link } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { isValid, format, parseISO } from 'date-fns';
 
+import { toast } from 'react-toastify';
 import { FiChevronLeft } from 'react-icons/fi';
+import { IBook } from '../../types/IBook';
+import { stripHtml } from '../../utils/text';
 
 import api from '../../services/api';
 
@@ -13,33 +17,36 @@ interface BookParams {
   id: string;
 }
 
-interface Book {
-  volumeInfo: {
-    title: string;
-    categories?: string[];
-    publisher?: string;
-    authors: string[];
-    description: string;
-    infoLink: string;
-    imageLinks?: {
-      thumbnail: string;
-    };
-    publishedDate: string;
-    pageCount: number;
-  };
-  id: string;
-}
-
 const Detail: React.FC = () => {
-  const [detail, setDetail] = useState<Book | null>(null);
+  const [detail, setDetail] = useState<IBook>();
+  const { id } = useParams<BookParams>();
 
-  const { params } = useRouteMatch<BookParams>();
+  const history = useHistory();
 
   useEffect(() => {
-    api.get(`/books/v1/volumes/${params.id}`).then(response => {
-      setDetail(response.data);
-    });
-  }, [params.id]);
+    const detailBook = async () => {
+      try {
+        const response = await api.get<IBook>(`/books/v1/volumes/${id}`);
+
+        if (response.status !== 200) {
+          throw new Error();
+        }
+
+        const details = response.data;
+        if (details.volumeInfo.description) {
+          details.volumeInfo.description = stripHtml(
+            details.volumeInfo.description,
+          );
+        }
+
+        setDetail(details);
+      } catch (err) {
+        toast.error('Ops! Algo inesperado ao mostrar detalhes');
+      }
+    };
+
+    detailBook();
+  }, [id]);
 
   return (
     <>
@@ -47,10 +54,10 @@ const Detail: React.FC = () => {
       <S.Container>
         <S.Title>Detalhes</S.Title>
 
-        <Link to="/">
+        <S.ButtonBack onClick={() => history.goBack()}>
           <FiChevronLeft size={20} />
           Voltar
-        </Link>
+        </S.ButtonBack>
       </S.Container>
 
       <S.BookDetail>
@@ -76,8 +83,19 @@ const Detail: React.FC = () => {
             <strong>{detail?.volumeInfo.publisher}</strong>
           </li>
           <li>
-            <span>Publicação</span>
-            <strong>{detail?.volumeInfo.publishedDate}</strong>
+            {detail?.volumeInfo.publishedDate && (
+              <>
+                <span>Publicação</span>
+                <strong>
+                  {isValid(parseISO(detail.volumeInfo.publishedDate))
+                    ? format(
+                        parseISO(detail.volumeInfo.publishedDate),
+                        'dd/MM/yyyy',
+                      )
+                    : detail.volumeInfo.publishedDate}
+                </strong>
+              </>
+            )}
           </li>
           <li>
             <span>Páginas</span>
