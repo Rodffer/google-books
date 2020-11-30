@@ -21,14 +21,15 @@ const Dashboard: React.FC = () => {
   const [itemsPerPage] = useState(8);
   const [currentPage] = useState(1);
 
-  const addFavorite = (title: string, obj: string): void => {
-    if (!obj) {
-      localStorage.removeItem(`@GoogleBooksExplorer:${title}`);
-      return;
-    }
+  // // const addFavorite = (title: string, obj: string): void => {
+  // //   if (!obj) {
+  // //     localStorage.removeItem(`@GoogleBooksExplorer:${title}`);
+  // //     return;
+  // //   }
 
-    localStorage.setItem(`@GoogleBooksExplorer:${title}`, obj);
-  };
+  // //   localStorage.setItem(`@GoogleBooksExplorer:${title}`, obj);
+  // // };
+  // },)
 
   async function handleSearchBook(
     event: FormEvent<HTMLFormElement>,
@@ -44,7 +45,6 @@ const Dashboard: React.FC = () => {
       );
 
       setResults(response.data.items);
-
       setInputError('');
     } catch (err) {
       setInputError('Erro ao buscar livro');
@@ -78,18 +78,18 @@ const Dashboard: React.FC = () => {
               <strong>{book.volumeInfo.title}</strong>
             </S.CardContent>
             <S.CardContentDate>
-              <p>{book.volumeInfo.publishedDate}</p>
+              <p>{book.volumeInfo.publishedDate?.substring(0, 4)}</p>
             </S.CardContentDate>
 
             <S.Details>
-              <FiBookmark
+              {/* <FiBookmark
                 title="Adicionar aos Favoritos"
                 size={20}
                 onClick={e => {
                   e.stopPropagation();
-                  addFavorite(book.volumeInfo.title, book.id);
+                  addFavorite(book.id);
                 }}
-              />
+              /> */}
 
               <Link to={`details/${book.id}`}>
                 Detalhes

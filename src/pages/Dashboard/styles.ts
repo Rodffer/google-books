@@ -114,10 +114,6 @@ export const CardContentDate = styled.div`
   margin-top: 4px;
   margin-left: 8px;
 
-  max-width: 4ch;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   text-decoration: none;
   color: var(--secgray);
 `;

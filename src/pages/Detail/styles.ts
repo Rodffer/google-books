@@ -41,7 +41,7 @@ export const BookDetail = styled.div`
     }
 
     img {
-      margin-top: 32px;
+      margin-top: 0px;
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
       border-bottom: 5px groove var(--orange);
