@@ -21,6 +21,15 @@ const Dashboard: React.FC = () => {
   const [itemsPerPage] = useState(8);
   const [currentPage] = useState(1);
 
+  const addFavorite = (title: string, obj: string): void => {
+    if (!obj) {
+      localStorage.removeItem(`@GoogleBooksExplorer:${title}`);
+      return;
+    }
+
+    localStorage.setItem(`@GoogleBooksExplorer:${title}`, obj);
+  };
+
   async function handleSearchBook(
     event: FormEvent<HTMLFormElement>,
   ): Promise<void> {
@@ -73,7 +82,14 @@ const Dashboard: React.FC = () => {
             </S.CardContentDate>
 
             <S.Details>
-              <FiBookmark title="Adicionar aos Favoritos" size={20} />
+              <FiBookmark
+                title="Adicionar aos Favoritos"
+                size={20}
+                onClick={e => {
+                  e.stopPropagation();
+                  addFavorite(book.volumeInfo.title, book.id);
+                }}
+              />
 
               <Link to={`details/${book.id}`}>
                 Detalhes

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
 
 export const Title = styled.h1`
   font-size: 48px;
@@ -15,11 +16,21 @@ export const Container = styled.div`
 `;
 
 export const BookDetail = styled.div`
-  margin-top: 80px;
+  margin-top: 64px;
 
   header {
     display: flex;
     align-items: center;
+
+    ${media.lessThan('medium')`
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      margin-top: 8px;
+      margin-bottom: 8px;
+        `}
 
     h1 {
       font-size: 36px;
@@ -34,6 +45,11 @@ export const BookDetail = styled.div`
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
       border-bottom: 5px groove var(--orange);
+
+      ${media.lessThan('medium')`
+      margin-top: 8px;
+      margin-bottom: 16px;
+        `}
     }
 
     div {
@@ -53,9 +69,24 @@ export const BookDetail = styled.div`
     list-style: none;
     margin-top: 40px;
 
+    ${media.lessThan('medium')`
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: left;
+      align-items: left;
+    `}
+
     li {
+      ${media.lessThan('medium')`
+      margin-left: 32px;
+    `}
       & + li {
         margin-left: 80px;
+
+        ${media.lessThan('medium')`
+         margin-left: 32px;
+        `}
       }
 
       strong {

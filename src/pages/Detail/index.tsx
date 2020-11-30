@@ -10,6 +10,7 @@ import { stripHtml } from '../../utils/text';
 import api from '../../services/api';
 
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 import * as S from './styles';
 
@@ -33,6 +34,7 @@ const Detail: React.FC = () => {
         }
 
         const details = response.data;
+
         if (details.volumeInfo.description) {
           details.volumeInfo.description = stripHtml(
             details.volumeInfo.description,
@@ -107,6 +109,7 @@ const Detail: React.FC = () => {
           </li>
         </ul>
       </S.BookDetail>
+      <Footer />
     </>
   );
 };

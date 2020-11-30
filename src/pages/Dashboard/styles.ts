@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { shade } from 'polished';
+import media from 'styled-media-query';
 
 interface FormProps {
   hasError: boolean;
@@ -54,6 +55,11 @@ export const Form = styled.form<FormProps>`
     border-radius: 0px 25px 25px 0px;
     border: 0;
     font-weight: bold;
+
+    ${media.lessThan('medium')`
+            font-size: 12px;
+            
+        `}
 
     &:hover {
       background: ${shade(0.2, '#71c2ff')};
