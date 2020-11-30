@@ -1,8 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 
 import { Link } from 'react-router-dom';
-import { FiChevronRight } from 'react-icons/fi';
-import { FcBookmark } from 'react-icons/fc';
+import { FiChevronRight, FiBookmark } from 'react-icons/fi';
 
 import { IBook } from '../../types/IBook';
 
@@ -36,6 +35,7 @@ const Dashboard: React.FC = () => {
       );
 
       setResults(response.data.items);
+
       setInputError('');
     } catch (err) {
       setInputError('Erro ao buscar livro');
@@ -73,10 +73,7 @@ const Dashboard: React.FC = () => {
             </S.CardContentDate>
 
             <S.Details>
-              <Link to={`favorites/${book.id}`}>
-                Favorito
-                <FcBookmark />
-              </Link>
+              <FiBookmark title="Adicionar aos Favoritos" size={20} />
 
               <Link to={`details/${book.id}`}>
                 Detalhes

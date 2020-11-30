@@ -137,7 +137,7 @@ export const CardContent = styled.div`
 `;
 
 export const Details = styled.div`
-  margin-top: 16px;
+  margin-top: 8px;
   margin-bottom: 16px;
 
   a {
@@ -168,19 +168,4 @@ export const Details = styled.div`
   svg {
     margin-left: 16px;
   }
-`;
-
-export const Paginator = styled.div`
-  margin-left: 64px;
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-export const PaginationButton = styled.div`
-  display: flex;
-`;
-export const PaginationItem = styled.div`
-  cursor: pointer;
-  margin: 0 10px;
 `;
