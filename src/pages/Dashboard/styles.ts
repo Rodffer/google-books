@@ -25,7 +25,7 @@ export const Form = styled.form<FormProps>`
     padding: 0 32px;
 
     border: 0;
-    border: 2px solid #fff;
+    border: 2px solid var(--white);
     border-right: 0;
     border-radius: 25px 0 0 25px;
 
@@ -171,8 +171,10 @@ export const Details = styled.div`
 `;
 
 export const Paginator = styled.div`
+  margin-left: 64px;
+  margin-top: 16px;
   display: flex;
-  min-width: 500px;
+  align-items: center;
   justify-content: space-between;
 `;
 export const PaginationButton = styled.div`

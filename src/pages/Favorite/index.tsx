@@ -31,8 +31,9 @@ interface Book {
 
 const Favorite: React.FC = () => {
   const [favorite, setFavorite] = useState<Book[]>(() => {
-    const storagedFavorites = localStorage.getItem(
+    const storagedFavorites = localStorage.setItem(
       '@GoogleBooksExplorer:favorites',
+      favorite,
     );
 
     if (storagedFavorites) {

@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from 'react';
+
 import { Link } from 'react-router-dom';
 import { FiChevronRight } from 'react-icons/fi';
 import { FcBookmark } from 'react-icons/fc';
@@ -12,11 +13,14 @@ import * as S from './styles';
 import api from '../../services/api';
 
 const Dashboard: React.FC = () => {
+  const [inputError, setInputError] = useState('');
+
   const [searchBook, setSearchBook] = useState('');
   const [results, setResults] = useState<IBook[]>([]);
-
   const [apiKey] = useState('AIzaSyDtjsZQXaPUwmGWLJktuRWSFk53WfH_lxg');
-  const [inputError, setInputError] = useState('');
+
+  const [itemsPerPage] = useState(8);
+  const [currentPage] = useState(1);
 
   async function handleSearchBook(
     event: FormEvent<HTMLFormElement>,
@@ -28,12 +32,10 @@ const Dashboard: React.FC = () => {
     }
     try {
       const response = await api.get(
-        `books/v1/volumes?q=/${searchBook}:keyes&${apiKey}`,
+        `books/v1/volumes?q=/${searchBook}:keyes&${apiKey}&startIndex=${currentPage}&maxResults=${itemsPerPage}`,
       );
 
       setResults(response.data.items);
-
-      setSearchBook('');
       setInputError('');
     } catch (err) {
       setInputError('Erro ao buscar livro');
@@ -52,9 +54,7 @@ const Dashboard: React.FC = () => {
         />
         <button type="submit">Pesquisar</button>
       </S.Form>
-
       {inputError && <S.Error>{inputError}</S.Error>}
-
       <S.Books>
         {results.map(book => (
           <S.Description key={book.id}>
