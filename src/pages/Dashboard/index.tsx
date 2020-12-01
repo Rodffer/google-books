@@ -45,7 +45,7 @@ const Dashboard: React.FC = () => {
   }
 
   useEffect(() => {
-    const booksSaveds = localStorage.getItem('books');
+    const booksSaveds = localStorage.getItem('@GoogleBooksFavorite');
 
     if (booksSaveds) {
       const convertedBooksSaveds: IBook[] = JSON.parse(booksSaveds);
@@ -57,7 +57,7 @@ const Dashboard: React.FC = () => {
     (book: IBook) => {
       if (!favBooks.includes(book)) {
         setFavBooks([...favBooks, book]);
-        localStorage.setItem('books', JSON.stringify(favBooks));
+        localStorage.setItem('@GoogleBooksFavorite', JSON.stringify(favBooks));
       }
     },
     [favBooks],

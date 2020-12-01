@@ -12,7 +12,9 @@ const Favorite: React.FC = () => {
   const [favorites, setFavorites] = useState<IBook[]>([]);
 
   useEffect(() => {
-    const booksFavorites: string | null = localStorage.getItem('books');
+    const booksFavorites: string | null = localStorage.getItem(
+      '@GoogleBooksFavorite',
+    );
 
     if (booksFavorites) {
       const booksFavoritesConverteds: IBook[] = JSON.parse(booksFavorites);

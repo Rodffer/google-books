@@ -14,13 +14,13 @@ import Footer from '../../components/Footer';
 
 import * as S from './styles';
 
-interface BookParams {
+interface IBookParams {
   id: string;
 }
 
 const Detail: React.FC = () => {
   const [detail, setDetail] = useState<IBook>();
-  const { id } = useParams<BookParams>();
+  const { id } = useParams<IBookParams>();
 
   const history = useHistory();
 
