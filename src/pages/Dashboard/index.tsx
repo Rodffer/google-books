@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useCallback, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 import { FiChevronRight, FiBookmark } from 'react-icons/fi';
@@ -21,15 +21,7 @@ const Dashboard: React.FC = () => {
   const [itemsPerPage] = useState(8);
   const [currentPage] = useState(1);
 
-  // // const addFavorite = (title: string, obj: string): void => {
-  // //   if (!obj) {
-  // //     localStorage.removeItem(`@GoogleBooksExplorer:${title}`);
-  // //     return;
-  // //   }
-
-  // //   localStorage.setItem(`@GoogleBooksExplorer:${title}`, obj);
-  // // };
-  // },)
+  const [favBooks, setFavBooks] = useState<IBook[]>([]);
 
   async function handleSearchBook(
     event: FormEvent<HTMLFormElement>,
@@ -45,11 +37,31 @@ const Dashboard: React.FC = () => {
       );
 
       setResults(response.data.items);
+
       setInputError('');
     } catch (err) {
       setInputError('Erro ao buscar livro');
     }
   }
+
+  useEffect(() => {
+    const booksSaveds = localStorage.getItem('books');
+
+    if (booksSaveds) {
+      const convertedBooksSaveds: IBook[] = JSON.parse(booksSaveds);
+      setFavBooks(convertedBooksSaveds);
+    }
+  }, []);
+
+  const handleFavorites = useCallback(
+    (book: IBook) => {
+      if (!favBooks.includes(book)) {
+        setFavBooks([...favBooks, book]);
+        localStorage.setItem('books', JSON.stringify(favBooks));
+      }
+    },
+    [favBooks],
+  );
 
   return (
     <>
@@ -64,6 +76,7 @@ const Dashboard: React.FC = () => {
         <button type="submit">Pesquisar</button>
       </S.Form>
       {inputError && <S.Error>{inputError}</S.Error>}
+
       <S.Books>
         {results.map(book => (
           <S.Description key={book.id}>
@@ -82,15 +95,9 @@ const Dashboard: React.FC = () => {
             </S.CardContentDate>
 
             <S.Details>
-              {/* <FiBookmark
-                title="Adicionar aos Favoritos"
-                size={20}
-                onClick={e => {
-                  e.stopPropagation();
-                  addFavorite(book.id);
-                }}
-              /> */}
-
+              <button type="button" onClick={() => handleFavorites(book)}>
+                <FiBookmark title="Adicionar aos Favoritos" size={20} />
+              </button>
               <Link to={`details/${book.id}`}>
                 Detalhes
                 <FiChevronRight />

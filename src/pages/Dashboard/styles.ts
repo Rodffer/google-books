@@ -142,6 +142,20 @@ export const Details = styled.div`
   margin-top: 8px;
   margin-bottom: 16px;
 
+  button {
+    background: transparent;
+    border: transparent;
+    span {
+      color: var(--blue);
+    }
+
+    svg {
+      &:hover {
+        color: var(--orange);
+      }
+    }
+  }
+
   a {
     margin-bottom: 2px;
     display: flex;
