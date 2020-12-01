@@ -2,9 +2,13 @@
 
 O presente projeto utiliza a [API Google Books](https://developers.google.com/books/)
 
+
+
 ## Desenvolvimento
 
 Inicialmente foi desenvolvido o prototipo de um template: [Template Google Books](https://www.figma.com/file/kOqJgKvdaMcqG7n3HGkXQB/Explore-Google-Books?node-id=0%3A1)
+
+Confira o resultado do desenvolvimento [Aqui!](https://eloquent-leavitt-a86bb6.netlify.app/)
 
 ### Tecnologias utilizadas
 - React
