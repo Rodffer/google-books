@@ -34,4 +34,4 @@ este repositorio e executar o seguinte comando:
 
 Até Breve!
 
-Atenciosamente Rayron Rodffer 🚀
+Atenciosamente, Rayron Rodffer 🚀
