@@ -26,7 +26,7 @@ Confira o resultado do desenvolvimento [Aqui!](https://eloquent-leavitt-a86bb6.n
 
 - Favoritos
   <br>
-![](https://media.giphy.com/media/ODEHkmYA00qkrDrC4t/giphy.gif)
+![](https://media.giphy.com/media/OqNXc260Uzu4ywMOtC/giphy.gif)
 
 - Responsividade
   <br>
